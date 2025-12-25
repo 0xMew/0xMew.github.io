@@ -1,0 +1,59 @@
+/*core css nastavenia stranky, ktore idealne nebudem menit*/
+.core
+{
+    font-family: Georgia, "Times New Roman", Times, serif !important;
+    font-size: 25px !important;
+    color: #ffffff;
+    background-color: #000000;
+    line-height: normal !important; 
+    list-style-type: none;
+    
+}
+
+
+.header_links
+{
+  word-spacing: 60px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.core_content
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+
+/*wrapper sluzi na nastavovanie, ake dlhe slovo sa moze vojst do daneho riadku/stlpcu predtym, ako ho to da do dalsieho riadku/stlpca*/
+.wrapper
+{
+  max-width:400px;
+  word-wrap: break-word;
+}
+
+/*zazracne fungujuci no spacing css, ktore mi nerozbija pillary, avsak nieje velmi kompatibilny ked sa ho snazim zakomponovat spolu s bootstrap clasami*/
+.no-spacing
+ {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: Georgia, "Times New Roman", Times, serif !important;
+    font-size: 25px !important;
+    color: #ffffff;
+    background-color: #000000;
+    line-height: normal !important; 
+    
+}
+
+.lavica
+{
+  text-align: left;
+}
+
+.pravica
+{
+  text-align: right;
+}
