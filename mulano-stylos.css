@@ -2,19 +2,19 @@
 .core
 {
     font-family: Georgia, "Times New Roman", Times, serif !important;
-    font-size: 25px !important;
+    font-size: 17px !important;
     color: #ffffff;
     background-color: #000000;
     line-height: normal !important; 
     list-style-type: none;
-    
+    min-height: 100vh;
 }
 
 
 .header_links
 {
-  word-spacing: 60px;
-  margin-bottom: 20px;
+  word-spacing: 42px;
+  margin-bottom: 14px;
   text-align: center;
 }
 
@@ -25,13 +25,15 @@
   align-items: center;
   text-align: center;
   flex: 1;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 
 /*wrapper sluzi na nastavovanie, ake dlhe slovo sa moze vojst do daneho riadku/stlpcu predtym, ako ho to da do dalsieho riadku/stlpca*/
 .wrapper
 {
-  max-width:400px;
+  max-width: 280px;
   word-wrap: break-word;
 }
 
@@ -41,7 +43,7 @@
     margin: 0 !important;
     padding: 0 !important;
     font-family: Georgia, "Times New Roman", Times, serif !important;
-    font-size: 25px !important;
+    font-size: 17px !important;
     color: #ffffff;
     background-color: #000000;
     line-height: normal !important; 
@@ -62,17 +64,39 @@
 {
   font-family: monospace;
   white-space: pre-wrap;
-  font-size: 30px;
+  font-size: 21px;
   color: #ffffff;
   line-height: 1.6;
   word-wrap: break-word;
+  max-width: 100%;
 }
 
 .report-image
 {
   max-width: 100%;
   height: auto;
-  margin: 15px 0;
+  margin: 10px 0;
   border: 1px solid #444;
   display: block;
+}
+
+/* Hide pillars on smaller screens */
+@media (max-width: 1200px) {
+  .wrapper {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header_links {
+    word-spacing: 20px;
+  }
+  
+  .core_content {
+    padding: 0 10px;
+  }
+  
+  .report-content {
+    font-size: 14px;
+  }
 }

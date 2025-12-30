@@ -2,7 +2,7 @@ var pillarBase = "██▓██▓██▓██";
 var pillarPeak = "░██▓██▓██▓██░";
 
 
-var lineHeight = 16;
+var lineHeight = 17;
 
 
 var viewportHeight = window.innerHeight;
@@ -57,14 +57,21 @@ window.addEventListener('load', function() {
         var isPortfolioPage = window.location.pathname.includes('portfolio.html') || 
                               document.title === 'Portfolio';
         
+        // Long writeup pages - use 85% of content height
+        var isLongWriteup = window.location.pathname.includes('nixu.html') || 
+                            window.location.pathname.includes('davivian.html') ||
+                            window.location.pathname.includes('kybereo.html');
+        
         var totalHeight;
         if (isPortfolioPage) {
             // For portfolio, use full viewport height
             totalHeight = window.innerHeight;
+        } else if (isLongWriteup) {
+            // For long writeups, use 85% of content height
+            totalHeight = actualContentHeight * 0.85;
         } else {
-            // Use 57.5% of content height (half + 15%) plus small buffer
-            var bufferPixels = 30; // Small buffer in pixels
-            totalHeight = (actualContentHeight * 0.575) + bufferPixels;
+            // Default: use full content height
+            totalHeight = actualContentHeight;
         }
         
         // Calculate new pillar count
