@@ -57,7 +57,7 @@ window.addEventListener('load', function() {
         var isPortfolioPage = window.location.pathname.includes('portfolio.html') || 
                               document.title === 'Portfolio';
         
-        // Long writeup pages - use 85% of content height
+        // Long writeup pages - use 90% of content height
         var isLongWriteup = window.location.pathname.includes('nixu.html') || 
                             window.location.pathname.includes('davivian.html') ||
                             window.location.pathname.includes('kybereo.html');
@@ -67,8 +67,8 @@ window.addEventListener('load', function() {
             // For portfolio, use full viewport height
             totalHeight = window.innerHeight;
         } else if (isLongWriteup) {
-            // For long writeups, use 85% of content height
-            totalHeight = actualContentHeight * 0.85;
+            // For long writeups, use 90% of content height
+            totalHeight = actualContentHeight * 0.90;
         } else {
             // Default: use full content height
             totalHeight = actualContentHeight;
