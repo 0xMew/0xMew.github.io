@@ -1,13 +1,15 @@
 var pillarBase = "██▓██▓██▓██";
 var pillarPeak = "░██▓██▓██▓██░";
 
-// Roughly estimate line height in pixels (depends on font/size)
-var lineHeight = 16; // adjust if needed
-// Total page height (viewport height here, can also use scrollHeight)
-var pageHeight = window.innerHeight;
 
-// How many base lines we need
-var pillarCount = Math.floor(pageHeight / lineHeight) - 2; // minus peaks
+var lineHeight = 16;
+
+
+var viewportHeight = window.innerHeight;
+var pillarCount = Math.floor(viewportHeight / lineHeight) - 2;
+
+
+if (pillarCount < 20) pillarCount = 20;
 
 document.write(pillarPeak + "\n");
 
@@ -16,5 +18,77 @@ for (let i = 0; i < pillarCount; i++) {
 }
 
 document.write(pillarPeak + "\n");
+
+
+window.addEventListener('load', function() {
+    setTimeout(function() {
+       
+        var coreContent = document.querySelector('.core_content');
+        var actualContentHeight = 0;
+        
+        if (coreContent) {
+           
+            var rect = coreContent.getBoundingClientRect();
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            actualContentHeight = rect.bottom + scrollTop;
+            
+           
+            if (actualContentHeight === 0 || actualContentHeight < 100) {
+                actualContentHeight = coreContent.offsetHeight || coreContent.scrollHeight || 0;
+            }
+        }
+        
+        
+        if (actualContentHeight === 0 || actualContentHeight < 100) {
+            var contentColumn = document.querySelector('.col-lg-8');
+            if (contentColumn) {
+                var rect = contentColumn.getBoundingClientRect();
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                actualContentHeight = rect.bottom + scrollTop;
+            }
+        }
+        
+        
+        if (actualContentHeight === 0 || actualContentHeight < 100) {
+            actualContentHeight = window.innerHeight;
+        }
+        
+        // Special exception for portfolio page - use viewport height
+        var isPortfolioPage = window.location.pathname.includes('portfolio.html') || 
+                              document.title === 'Portfolio';
+        
+        var totalHeight;
+        if (isPortfolioPage) {
+            // For portfolio, use full viewport height
+            totalHeight = window.innerHeight;
+        } else {
+            // Use 57.5% of content height (half + 15%) plus small buffer
+            var bufferPixels = 30; // Small buffer in pixels
+            totalHeight = (actualContentHeight * 0.575) + bufferPixels;
+        }
+        
+        // Calculate new pillar count
+        var newPillarCount = Math.floor(totalHeight / lineHeight) - 2;
+        
+        // Ensure minimum but don't make it too long
+        if (newPillarCount < 20) newPillarCount = 20;
+        
+        // Always update to match content (removed the threshold check)
+        pillarCount = newPillarCount;
+        var pillarHTML = pillarPeak + "\n";
+        for (let i = 0; i < pillarCount; i++) {
+            pillarHTML += "   " + pillarBase + "\n";
+        }
+        pillarHTML += pillarPeak + "\n";
+        
+        // Update all pillar elements
+        var pillars = document.querySelectorAll('.no-spacing');
+        pillars.forEach(function(pillar) {
+            if (pillar.textContent && pillar.textContent.includes(pillarBase)) {
+                pillar.textContent = pillarHTML;
+            }
+        });
+    }, 500);
+});
 
 //V tejto verzii pillars scriptu sme schopni ich generovat normalne podseba s tym, ze ak su na krivo, da sa to cez css wrapper upravit tak, aby nam sedeli presne do columnu

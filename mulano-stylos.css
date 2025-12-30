@@ -57,3 +57,22 @@
 {
   text-align: right;
 }
+
+.report-content
+{
+  font-family: monospace;
+  white-space: pre-wrap;
+  font-size: 30px;
+  color: #ffffff;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.report-image
+{
+  max-width: 100%;
+  height: auto;
+  margin: 15px 0;
+  border: 1px solid #444;
+  display: block;
+}
